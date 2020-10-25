@@ -70,7 +70,7 @@
                                         </div>
 
                                         <div class="form-group">
-
+                                            <a href="{{route('register')}}" class="text-bold">Create Your Account</a>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 

@@ -20,3 +20,11 @@ for (var i = 0; i < navItem.length; i++) {
         this.className += " active";
     });
 }
+$(window).on("load",function () {
+    $(".loader-container").fadeOut(500,function () {
+        $(this).remove();
+    });
+});
+new WOW().init();
+
+//post slide

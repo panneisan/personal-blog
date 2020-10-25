@@ -57,17 +57,78 @@
                 </h5>
             </li>
             <li>
-                <a class="menu-item" href="">
+                <a class="menu-item" href="{{route('project.create')}}">
                     <span>
                         <i class="feather-user-plus mr-1"></i>
-
+                        Add project
                     </span>
 
                 </a>
-                <a class="menu-item" href="">
+                <a class="menu-item" href="{{route('project.index')}}">
+                    <span>
+                        <i class="feather-list mr-1"></i>
+                        Project List
+                    </span>
+                    <span class="badge badge-pill badge-light shadow-sm">
+                        {{ \App\Project::count() }}
+                    </span>
+
+
+                </a>
+            </li>
+            <li>
+                <div class="my-5"></div>
+            </li>
+            <li>
+                <h5 class="text-secondary">
+                    Category Management
+                </h5>
+            </li>
+            <li>
+                <a class="menu-item" href="{{route('category.create')}}">
                     <span>
                         <i class="feather-user-plus mr-1"></i>
+                        Add Category
                     </span>
+
+                </a>
+                <a class="menu-item" href="{{route('category.index')}}">
+                    <span>
+                        <i class="feather-list mr-1"></i>
+                        Categories List
+                    </span>
+                    <span class="badge badge-pill badge-light shadow-sm">
+                        {{ \App\Category::count() }}
+                    </span>
+
+
+                </a>
+            </li>
+            <li>
+                <div class="my-5"></div>
+            </li>
+            <li>
+                <h5 class="text-secondary">
+                    Blog Post Management
+                </h5>
+            </li>
+            <li>
+                <a class="menu-item" href="{{route("post.create")}}">
+                    <span>
+                        <i class="feather-user-plus mr-1"></i>
+                        Add Post
+                    </span>
+
+                </a>
+                <a class="menu-item" href="{{route('post.index')}}">
+                    <span>
+                        <i class="feather-list mr-1"></i>
+                        Post List
+                    </span>
+                    <span class="badge badge-pill badge-light shadow-sm">
+                        {{\App\Post::count()}}
+                    </span>
+
 
                 </a>
             </li>

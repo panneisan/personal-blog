@@ -24,7 +24,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $users = User::latest()->paginate(5);
+        return view('admin.dashboard',compact("users"));
     }
 
 }

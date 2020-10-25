@@ -17,7 +17,7 @@
                             <hr><nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route("dashboard")}}">Skill</a></li>
-                                    <li class="breadcrumb-item" aria-current="page">User-list</li>
+                                    <li class="breadcrumb-item" aria-current="page">Skill-list</li>
                                 </ol>
                             </nav>
                             <table class="table table-striped mb-0 sub-list" id="data-table">

@@ -613,15 +613,15 @@ var videoDialog = function (opt) {
 var imageDialog = function (opt) {
     var body = '<div class="note-form-group note-group-select-from-files">' +
         '<label class="note-form-label">' + opt.lang.image.selectFromFiles + '</label>' +
-        '<input class="note-note-image-input note-input" type="file" name="files" accept="image/*" multiple="multiple" />' +
+        '<input class="note-note-images-input note-input" type="file" name="files" accept="images/*" multiple="multiple" />' +
         opt.imageLimitation +
         '</div>' +
         '<div class="note-form-group" style="overflow:auto;">' +
         '<label class="note-form-label">' + opt.lang.image.url + '</label>' +
-        '<input class="note-image-url note-input" type="text" />' +
+        '<input class="note-images-url note-input" type="text" />' +
         '</div>';
     var footer = [
-        '<button href="#" type="button" class="note-btn note-btn-primary note-btn-large note-image-btn disabled" disabled>',
+        '<button href="#" type="button" class="note-btn note-btn-primary note-btn-large note-images-btn disabled" disabled>',
         opt.lang.image.insert,
         '</button>'
     ].join('');
@@ -813,8 +813,8 @@ $$1.extend($$1.summernote.lang, {
             shapeCircle: 'Shape: Circle',
             shapeThumbnail: 'Shape: Thumbnail',
             shapeNone: 'Shape: None',
-            dragImageHere: 'Drag image or text here',
-            dropImage: 'Drop image or Text',
+            dragImageHere: 'Drag images or text here',
+            dropImage: 'Drop images or Text',
             selectFromFiles: 'Select from files',
             maximumFileSize: 'Maximum file size',
             maximumFileSizeError: 'Maximum file size exceeded.',
@@ -3155,10 +3155,10 @@ function readFileAsDataURL(file) {
 /**
  * @method createImage
  *
- * create `<image>` from url string
+ * create `<images>` from url string
  *
  * @param {String} url
- * @return {Promise} - then: $image
+ * @return {Promise} - then: $images
  */
 function createImage(url) {
     return $$1.Deferred(function (deferred) {
@@ -4268,7 +4268,7 @@ var Editor = /** @class */ (function () {
             })(idx);
             this.context.memo('help.formatH' + idx, this.lang.help['formatH' + idx]);
         }
-        
+
         this.insertParagraph = this.wrapCommand(function () {
             _this.typing.insertParagraph(_this.editable);
         });
@@ -4729,7 +4729,7 @@ var Editor = /** @class */ (function () {
         };
     };
     /**
-     * insert image
+     * insert images
      *
      * @param {String} src
      * @param {String|Function} param
@@ -4753,7 +4753,7 @@ var Editor = /** @class */ (function () {
             range.createFromNodeAfter($image[0]).select();
             _this.afterCommand();
         }).fail(function (e) {
-            _this.context.triggerEvent('image.upload.error', e);
+            _this.context.triggerEvent('images.upload.error', e);
         });
     };
     /**
@@ -4765,13 +4765,13 @@ var Editor = /** @class */ (function () {
         $$1.each(files, function (idx, file) {
             var filename = file.name;
             if (_this.options.maximumImageFileSize && _this.options.maximumImageFileSize < file.size) {
-                _this.context.triggerEvent('image.upload.error', _this.lang.image.maximumFileSizeError);
+                _this.context.triggerEvent('images.upload.error', _this.lang.image.maximumFileSizeError);
             }
             else {
                 readFileAsDataURL(file).then(function (dataURL) {
                     return _this.insertImage(dataURL, filename);
                 }).fail(function () {
-                    _this.context.triggerEvent('image.upload.error');
+                    _this.context.triggerEvent('images.upload.error');
                 });
             }
         });
@@ -4784,7 +4784,7 @@ var Editor = /** @class */ (function () {
         var callbacks = this.options.callbacks;
         // If onImageUpload this.options setted
         if (callbacks.onImageUpload) {
-            this.context.triggerEvent('image.upload', files);
+            this.context.triggerEvent('images.upload', files);
             // else insert Image as dataURL
         }
         else {
@@ -4989,7 +4989,7 @@ var Clipboard = /** @class */ (function () {
         var clipboardData = event.originalEvent.clipboardData;
         if (clipboardData && clipboardData.items && clipboardData.items.length) {
             var item = lists.head(clipboardData.items);
-            if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+            if (item.kind === 'file' && item.type.indexOf('images/') !== -1) {
                 this.context.invoke('editor.insertImagesOrCallback', [item.getAsFile()]);
             }
             this.context.invoke('editor.afterCommand');
@@ -5396,7 +5396,7 @@ var Handle = /** @class */ (function () {
                 top: pos.top,
                 width: imageSize.w,
                 height: imageSize.h
-            }).data('target', $image); // save current image element.
+            }).data('target', $image); // save current images element.
             var origImageObj = new Image();
             origImageObj.src = $image.attr('src');
             var sizingText = imageSize.w + 'x' + imageSize.h + ' (' + this.lang.image.original + ': ' + origImageObj.width + 'x' + origImageObj.height + ')';
@@ -5993,7 +5993,7 @@ var Buttons = /** @class */ (function () {
         });
     };
     /**
-     * image : [
+     * images : [
      *   ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
      *   ['float', ['floatLeft', 'floatRight', 'floatNone' ]],
      *   ['remove', ['removeMedia']]
@@ -6604,17 +6604,17 @@ var ImageDialog = /** @class */ (function () {
         var body = [
             '<div class="form-group note-form-group note-group-select-from-files">',
             '<label class="note-form-label">' + this.lang.image.selectFromFiles + '</label>',
-            '<input class="note-image-input note-form-control note-input" ',
-            ' type="file" name="files" accept="image/*" multiple="multiple" />',
+            '<input class="note-images-input note-form-control note-input" ',
+            ' type="file" name="files" accept="images/*" multiple="multiple" />',
             imageLimitation,
             '</div>',
-            '<div class="form-group note-group-image-url" style="overflow:auto;">',
+            '<div class="form-group note-group-images-url" style="overflow:auto;">',
             '<label class="note-form-label">' + this.lang.image.url + '</label>',
-            '<input class="note-image-url form-control note-form-control note-input ',
+            '<input class="note-images-url form-control note-form-control note-input ',
             ' col-md-12" type="text" />',
             '</div>'
         ].join('');
-        var buttonClass = 'btn btn-primary note-btn note-btn-primary note-image-btn';
+        var buttonClass = 'btn btn-primary note-btn note-btn-primary note-images-btn';
         var footer = "<button type=\"submit\" href=\"#\" class=\"" + buttonClass + "\" disabled>" + this.lang.image.insert + "</button>";
         this.$dialog = this.ui.dialog({
             title: this.lang.image.insert,
@@ -6653,7 +6653,7 @@ var ImageDialog = /** @class */ (function () {
         });
     };
     /**
-     * show image dialog
+     * show images dialog
      *
      * @param {jQuery} $dialog
      * @return {Promise}
@@ -6661,9 +6661,9 @@ var ImageDialog = /** @class */ (function () {
     ImageDialog.prototype.showImageDialog = function () {
         var _this = this;
         return $$1.Deferred(function (deferred) {
-            var $imageInput = _this.$dialog.find('.note-image-input');
-            var $imageUrl = _this.$dialog.find('.note-image-url');
-            var $imageBtn = _this.$dialog.find('.note-image-btn');
+            var $imageInput = _this.$dialog.find('.note-images-input');
+            var $imageUrl = _this.$dialog.find('.note-images-url');
+            var $imageBtn = _this.$dialog.find('.note-images-btn');
             _this.ui.onDialogShown(_this.$dialog, function () {
                 _this.context.triggerEvent('dialog.shown');
                 // Cloning imageInput to clear element.
@@ -6720,7 +6720,7 @@ var ImagePopover = /** @class */ (function () {
     };
     ImagePopover.prototype.initialize = function () {
         this.$popover = this.ui.popover({
-            className: 'note-image-popover'
+            className: 'note-images-popover'
         }).render().appendTo(this.options.container);
         var $content = this.$popover.find('.popover-content,.note-popover-content');
         this.context.invoke('buttons.build', $content, this.options.popover.image);
@@ -6950,7 +6950,7 @@ var VideoDialog = /** @class */ (function () {
         });
     };
     /**
-     * show image dialog
+     * show images dialog
      *
      * @param {jQuery} $dialog
      * @return {Promise}

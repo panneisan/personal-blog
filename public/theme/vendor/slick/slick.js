@@ -1784,7 +1784,7 @@
                 if ( tryCount < 3 ) {
 
                     /**
-                     * try to load the image 3 times,
+                     * try to load the images 3 times,
                      * leave a slight delay so we don't get
                      * servers blocking the request.
                      */

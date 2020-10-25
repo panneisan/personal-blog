@@ -281,7 +281,17 @@ a i.fa{
     box-shadow: 0 0 10px #00000030;
     text-align: center;
 }
-
+.status-card{
+    transition: 0.3s;
+}
+.status-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0 ,0, 0, 0.2);
+}
+.status-card:active{
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(0 ,0, 0, 0.2);
+}
 .new-customer:first-of-type{
     margin-left: 0 !important;
 }

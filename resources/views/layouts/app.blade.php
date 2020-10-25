@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ config('calendar.locale') }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -7,7 +7,7 @@
 
     <title>{{ \App\Custom::$info['short_name'] }}Info</title>
 
-{{--    <link rel="icon" href="{{ asset(\App\Custom::$info['c-logo']) }}">--}}
+    <link rel="icon" href="{{ asset(\App\Custom::$info['c-logo']) }}">
     <link rel="stylesheet" href="{{ asset(\App\Custom::$info['main_css']) }}">
     <link rel="stylesheet" href="{{asset('theme/vendor/feather-icons-web/feather.css')}}">
     <link rel="stylesheet" href="{{asset('theme/vendor/font-awesome/css/all.min.css')}}">
@@ -65,9 +65,11 @@
 <!-- Scripts -->
     <script src="{{ asset('theme/js/jquery.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="{{ asset('theme/js/bootstrap.js') }}"></script>
     <script src="{{ asset('theme/vendor/data_table/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('theme/vendor/data_table/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('theme/vendor/counter-up/counterup.min.js') }}"></script>
+    <script src="{{asset('vendor/chart_js/Chart.min.js')}}"></script>
+    <script src="{{ asset('theme/js/bootstrap.js') }}"></script>
     <script src="{{ asset('theme/js/app.js') }}"></script>
 
     @yield('foot')

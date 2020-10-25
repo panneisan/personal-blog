@@ -1,4 +1,12 @@
 <!doctype html>
+<div class="loader-container">
+    <div class="spinner">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+</div>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +14,107 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/animate_it/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/slick/slick.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/slick/slick-theme.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/light_box/lightbox.min.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/feather-icon/feather.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <title>@yield("title")</title>
+    <style>
+        .loader-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            height:100vh;
+            width: 100%;
+            position: fixed;
+            z-index: 2000;
+        }
+        .spinner {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            /*   border: 1px solid black; */
+            animation: spin 3s linear infinite;
+        }
+
+        .spinner .circle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            border-radius: 0%;
+            background: #000000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: scale(1);
+            animation: positionToCenter 1s ease-in infinite;
+            animation-direction: alternate;
+        }
+
+        .spinner .circle:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            border-radius: 0;
+            background: gray;
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: scale(1) translate(0%,0%);
+            animation: positionToCenter 1s ease-in infinite;
+            animation-direction: alternate;
+        }
+
+        .spinner .circle:nth-child(3) {
+            width: 20px;
+            height: 20px;
+            border-radius: 0%;
+            background: gray;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transform: scale(1) translate(0%,0%);
+            animation: positionToCenter 1s ease-in infinite;
+            animation-direction: alternate;
+        }
+
+        .spinner .circle:nth-child(4) {
+            width: 20px;
+            height: 20px;
+            border-radius: 0%;
+            background: #000000;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transform: scale(1) translate(0%,0%);
+            animation: positionToCenter 1s ease-in infinite;
+            animation-direction: alternate;
+        }
+
+
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes positionToCenter {
+            to {
+                left: 50%;
+                top: 50%;
+                bottom: 50%;
+                right: 50%;
+                transform: scale(2) translate(-50%,-50%);
+                background: #1abc9c;
+                border-radius: 50%;
+            }
+        }
+    </style>
 </head>
 <body>
 <!--header-->
@@ -20,17 +126,14 @@
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-md-2"></div>
                     <div class="col-md-4">
-                        <img src="{{asset('img/2.jpg')}}" id="header-img" alt="">
+                        <img src="{{asset('img/2.jpg')}}" class="animate__animated animate__slideInDown ani-dalay-1" id="header-img" alt="">
                     </div>
                     <div class="col-md-4">
-                        <h1>Hello Guys!</h1>
-                        <h2>It's Me</h2>
-                        <h2>Pann Ei San</h2>
+                        <h1 class="animate__animated animate__slideInDown ani-dalay-2">Hello Guys!</h1>
+                        <h2 class=" animate__animated animate__fadeIn ani-dalay-4">It's Me</h2>
+                        <h2 class=" animate__animated animate__fadeInUp ani-dalay-3">Pann Ei San</h2>
                         <br>
-                        <a href="{{route('blog.show')}}" class="btn btn-light">
-                            <i class="feather-plus-circle"></i>
-                            Explore My Blogs
-                        </a>
+                        @yield('explore-btn')
                     </div>
                     <div class="col-md-2 d-md-none"></div>
                 </div>
@@ -38,7 +141,7 @@
             <!--            navigation-->
             <div class="position-sticky d-flex justify-content-between" id="navbar">
                 <div class="main-header container">
-                    <nav class="nav navbar-expand-md" id="nav-list">
+                    <nav class="nav navbar-expand-md animate__animated animate__slideInDown ani-dalay-5" id="nav-list">
                         <ul class="nav-list" >
                             <li class="nav-item active"><a href="{{url('/')}}">Home</a></li>
                             <li class="nav-item"><a href="#about">About</a></li>
@@ -48,26 +151,7 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="d-flex justify-content-around px-3">
-                    @if(Auth::check())
-                        <a href="" class="text-light">{{strtoupper(Auth::user()->name)}}</a>
-
-
-                        <a href="" class="text-light px-2" onclick="event.preventDefault();if(confirm('Are you really want to Logout?')){
-                                    document.getElementById('logout-form').submit()
-                                }">
-                            Logout</a>
-                        <form id="logout-form" action="{{ route('logout') }}" class="d-none" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item">Logout</button>
-                        </form>
-
-
-                    @else
-                        <a href="{{ route('login') }}" class="text-light">Login</a>
-                        <a href="{{ route('register') }}" class="px-2 text-light">Register</a>
-                    @endif
-                </div>
+                @yield('auth')
             </div>
 
             <!--            about-->
@@ -80,7 +164,7 @@
 </div>
 <!--footer-->
 <div class="container-fluid footer text-white" id="contact">
-    <div class="row">
+    <div class="row wow animate__slideInDown ani-dalay-1">
         <div class="col-12 col-md-4 p-lg-2 p-sm-0 p-md-0">
             <h3>This is About</h3>
             <br>
@@ -108,10 +192,12 @@
 
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('js/popper.min.js')}}"></script>
+<script src="{{asset('vendor/light_box/lightbox-plus-jquery.min.js')}}"></script>
+<script src="{{asset('vendor/slick/slick.min.js')}}"></script>
+<script src="{{asset('vendor/wow/wow.js')}}"></script>
 <script src="{{asset('js/bootstrap.js')}}"></script>
 <script src="{{asset('js/script.js')}}"></script>
-</body>
-<script>
 
-</script>
+@yield('script')
+</body>
 </html>

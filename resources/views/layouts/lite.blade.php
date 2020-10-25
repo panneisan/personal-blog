@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>@yield("title")</title>
-
-
+    <link rel="icon" href="{{ asset(\App\Custom::$info['c-logo']) }}">
 
     <link rel="stylesheet" href="{{ asset('theme/css/chatbot.css') }}">
     <link rel="stylesheet" href="{{asset('theme/vendor/feather-icons-web/feather.css')}}">

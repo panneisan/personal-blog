@@ -28,8 +28,11 @@
                                   <th>Name</th>
                                   <th>Email</th>
                                   <th>role</th>
+                                  <th>Provider</th>
                                   <th>Controls</th>
-                                  <th>Reg-Time</th>
+                                  <th>Time</th>
+                                  <th>Date</th>
+
                               </tr>
                               </thead>
                               <tbody>
@@ -42,6 +45,7 @@
                                            <td>{{$u->name}}</td>
                                            <td>{{$u->email}}</td>
                                            <td>{{$u->role}}</td>
+                                           <td>{{$u->provider}}</td>
                                            <td class="no-warp">
                                                <div class="dropdown">
                                                    <button id="dLabel"  class="btn btn-outline-primary btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
@@ -61,7 +65,8 @@
                                                    </div>
                                                </div>
                                            </td>
-                                           <td class="no-warp">{{ $u->created_at->diffforhumans()  }}</td>
+                                           <td class="no-warp">{{ $u->created_at->format("h:i")}}</td>
+                                           <td class="no-warp">{{ $u->created_at->format("j.n.y")}}</td>
                                        </tr>
                                    @endforeach
                               </tbody>

@@ -1,91 +1,68 @@
 @extends("frontend.master")
 
 @section('title')Personal Details @endsection
-
+@section('explore-btn')
+    <a href="{{route('blog.show')}}" class="btn btn-light animate__animated animate__fadeIn ani-dalay-5">
+        <i class="feather-plus-circle"></i>
+        Explore My Blogs
+    </a>
+@stop
 @section("content")
     <div class="row h-full d-flex justify-content-center align-items-center p-2 mt-3">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-5 px-md-2">
+                <div class="col-12 col-md-5 px-md-2 animate__animated animate__fadeIn ani-dalay-5">
                     <div class="aboutme px-2 text-justify">
                         <h3 class="text-center">ABOUT ME</h3>
-                        <p>
-                            I'm graduated from Thanlyin Technological University,majoring with <b>Electronic and Communication</b> Engineering.
+                        <p class="text-justify">
+                            My name is Pann Ei San and I live in Yangon, Myanmar. I have got a bachelor’s degree of Electronic and Communication  in Thanlyin Technological University.I'm writing to this to show my interest to apply this opportunity which is open in your organization.
                             <br>
-                            I'm also completed in Web Design and Development Course:HTML,CSS,JS,Bootstrap,jQuery,API,PHP,Laravel.And also completed in networking
-                            basic and can use designing tools such photoshop.
+                            <br>
+                            I completed in web programming such as web design and development course:
+                            <br>
+                            html5,CSS3,jQuery,Bootstrap,php,laravel.And I known the basic knowledge of networking,CCNA (routing and switching),can draw autocad.Then I can use design application such as photoshop a little but not a professional level.
                         </p>
                     </div>
                     <div class="row px-2">
-                        <div class="col-md-6 mb-1">
-                            <div class="text-center about-text">
-                                <i class="feather-activity text-warning" style="font-size: 30px"></i>
-                                <br>
-                                <strong>6</strong>
-                                <p>Total Projects</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-1">
-                            <div class="text-center about-text">
-                                <i class="feather-users text-info" style="font-size: 30px"></i>
-                                <br>
-                                <strong>7</strong>
-                                <p>Total Students</p>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
-                <div class="col-12 col-md-7 px-md-3" id="skill">
+                <div class="col-12 col-md-7 px-md-3 animate__animated animate__fadeIn ani-dalay-5" >
                     <h3 class="text-center">MY SKILLS</h3>
                     <br>
-                    @foreach($skills as $s)
-                        <div class="row mb-3">
-                            <div class="col-md-9">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-animated progress-bar-striped bg-dark" role="progressbar" style="width: {{$s->percentage}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                        {{$s->percentage}}%
+                            <div class="" id="skill">
+                                @foreach($skills as $s)
+                                    <div class="row mb-3">
+                                        <div class="col-md-9">
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-animated progress-bar-striped bg-dark" role="progressbar" style="width: {{$s->percentage}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                                    {{$s->percentage}}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">{{$s->name}}</div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                            <div class="col-md-3">{{$s->name}}</div>
-                        </div>
-                    @endforeach
                     {{$skills->links()}}
                 </div>
             </div>
 
             <div class="row mt-3">
-                <div class="container">
+                <div class="container wow animate__fadeIn ani-dalay-1">
                     <h3 class="text-center">MY PROJECTS</h3>
                     <div class="row mt-5">
-                        <div class="col-12 col-md-4 mb-2">
+                        @foreach($project as $p)
+                        <div class="col-12 col-md-3 mb-2">
                             <a href="" target="_blank" class="text-dark">
                                 <div class="single-project">
                                     <i class="feather-activity"></i>
                                     <br>
-                                    <a href="https://pesmarketing.000webhostapp.com" target="_blank">Marketing</a>
+                                    <a href="{{$p->url}}" target="_blank">{{$p->name}}</a>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-12 col-md-4 mb-2">
-                            <a href="" target="_blank" class="text-dark">
-                                <div class="single-project">
-                                    <i class="feather-activity"></i>
-                                    <br>
-                                    <a href="https://vsttravelandtour.000webhostapp.com/" target="_blank">Tour Management</a>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-12 col-md-4 mb-2">
-                            <a href="" target="_blank" class="text-dark">
-                                <div class="single-project">
-                                    <i class="feather-activity"></i>
-                                    <br>
-                                    <a href="https://mydasboarddesign.000webhostapp.com/" target="_blank">Admin Dashboard</a>
-                                </div>
-                            </a>
-                        </div>
-
+                        @endforeach
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
@@ -103,49 +80,34 @@
                             can read that.
                         </p>
                         <br>
-                        <div class="row mt-2">
+                        <div class="row mt-2 blog-slide" id="blog-slide">
+                            @foreach($post as $pt)
                             <div class="col-12 col-md-4">
-                                <div class=" mb-3">
-                                    <div class="">
-                                        <a href="">
-                                            <img src="{{asset('img/rose/1.png')}}" class="card-img-bottom" alt="">
-                                        </a>
-                                        <br>
-                                        <small class="text-dark font-weight-bold">25 May,2020|By Pann Ei San</small>
-                                        <br>
-                                        <a href="{{route('blog.show')}}" class="h4">How Can I be a professional Developer?</a>
-                                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi enim in itaque non ullam! Distinctio officiis pariatur provident  vel.</p>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class=" mb-3">
+                                            <a href="{{asset($pt->photo)}}" data-lightbox="example-set" data-title="{{$pt->title}}">
+                                                <img src="{{asset($pt->photo)}}" class="card-img-top" alt="">
+                                            </a>
+                                            <hr>
+                                                <small class="text-dark font-weight-bold">{{$pt->created_at->format('Y-M-D')}}|By
+                                                    @if(auth()->check())
+                                                    {{Auth::user()->name}}
+                                                    @else
+                                                    Admin
+                                                    @endif
+                                                </small>
+                                                <br>
+                                                <a href="{{route('blog.show')}}" class="h4">{{$pt->title}}</a>
+                                            <br>
+                                                <a href="{{route('blog.detail',$pt->id)}}" class="text-justify text-dark">
+                                                    {{substr($pt->description,0,100)}}....
+                                                </a>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4">
-                                <div class=" mb-3">
-                                    <div class="">
-                                        <a href="">
-                                            <img src="{{asset('img/rabbit/1.jpg')}}" class="card-img-bottom" alt="">
-                                        </a>
-                                        <br>
-                                        <small class="text-dark font-weight-bold">25 May,2020|By Pann Ei San</small>
-                                        <br>
-                                        <a href="{{route('blog.show')}}" class="h4">How Can I be a professional Developer?</a>
-                                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi enim in itaque non ullam! Distinctio officiis pariatur provident  vel.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <div class=" mb-3">
-                                    <div class="">
-                                        <a href="">
-                                            <img src="{{asset('img/rabbit/2.jpg')}}" class="card-img-bottom" alt="">
-                                        </a>
-                                        <br>
-                                        <small class="text-dark font-weight-bold">25 May,2020|By Pann Ei San</small>
-                                        <br>
-                                        <a href="{{route('blog.show')}}" class="h4">How Can I be a professional Developer?</a>
-                                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi enim in itaque non ullam! Distinctio officiis pariatur provident  vel.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
 
@@ -154,4 +116,49 @@
         </div>
     </div>
 
+@endsection
+@section('script')
+    <script>
+        new WOW().init();
+        $(".blog-slide").slick({
+            arrows:false,
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            responsive: [
+                {
+                    breakpoint: 1400,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 800,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
+        });
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true
+        })
+    </script>
 @endsection

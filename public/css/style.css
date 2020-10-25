@@ -131,6 +131,46 @@ body{
 	padding: 10px;
 	background: #f2f3f4;
 }
+.slick-dots {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.slick-dots li{
+    width: 10px !important;
+    height: 10px !important;
+    background-color: transparent;
+    border: 2px solid #7E76F9;
+    border-radius: 50%;
+}
+.slick-dots li.slick-active{
+    width: 15px !important;
+    height: 15px !important;
+    background-color:black !important;
+}
+
+.ani-dalay-1{
+    animation-delay: 0.3s;
+}
+.ani-dalay-2{
+    animation-delay: 0.7s;
+}
+.ani-dalay-3{
+    animation-delay:1.4s;
+}
+.ani-dalay-4{
+    animation-delay: 2s;
+}
+.ani-dalay-5{
+    animation-delay: 2.5s;
+}
+.ani-dalay-6{
+    animation-delay: 2.5s;
+}
+
  @media (max-width: 1024px) {
 	.footer{
 		padding: 10px;

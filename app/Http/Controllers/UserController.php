@@ -31,8 +31,8 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->role = $request->role;
 
+        $path = "user-images/";
         if($request->hasFile('photo')){
-                $path =public_path('/user-image/');
                 $newFileName = 'user_'.uniqid().'.'.$request->file('photo')->getClientOriginalExtension();
                 $request->file('photo')->move($path, $newFileName);
                 $user->photo = $path.$newFileName;
