@@ -19,7 +19,7 @@
                                     <li class="breadcrumb-item" aria-current="page">Add-Project</li>
                                 </ol>
                             </nav>
-                            <form action="{{route('project.store')}}" method="post">
+                            <form action="{{route('project.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="from-group">
                                     <label for="name">Enter Your Project Name</label>
@@ -36,6 +36,22 @@
                                     @enderror
                                 </div>
                                 <br>
+                                <div class="form-group">
+                                    <div class="form-inline d-flex justify-content-start align-items-center">
+                                        <div class="position-relative">
+                                            <button type="button" class="btn btn-light position-absolute edit-photo" style="bottom: 5px;right: 15px">
+                                                <i class="fas fa-edit text-primary"></i>
+                                            </button>
+                                            <img src="{{asset("/images/1.jpg")}}" style="height: 200px;width: 200px" class="mr-2 rounded current-img" alt="">
+                                        </div>
+                                        <input type="hidden" name="original" id="original" value="">
+                                        <input type="file" name="photo" id="file-upload" accept="image/png,image/jpeg,image/jpg" onchange='openFile(event)' class="form-control d-none flex-grow-1 p-1 mr-2">
+                                        @error("photo")
+                                        <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <br>
                                 <button type="submit" class="btn btn-primary"><i class="feather-plus"></i>Add</button>
                             </form>
                         </div>
@@ -48,6 +64,7 @@
                                 <thead>
                                 <tr>
                                     <th>id</th>
+                                    <th>Logo</th>
                                     <th>Name</th>
                                     <th>Url</th>
                                     <th>Controls</th>
@@ -58,6 +75,9 @@
                                 @foreach($projects as $pj)
                                     <tr>
                                         <td>{{$pj->id}}</td>
+                                        <td>
+                                            <img src="{{asset($pj->photo)}}" class="w-25 rounded rounded-circle" alt="">
+                                        </td>
                                         <td>{{$pj->name}}</td>
                                         <td>{{$pj->url}}</td>
                                         <td class="d-flex">
@@ -85,4 +105,23 @@
         </div>
     </div>
     @include('layouts.toast')
+@endsection
+@section("foot")
+    <script>
+        $(".edit-photo").click(function () {
+            $("#file-upload").click();
+        });
+
+        var openFile = function(event) {
+            var input = event.target;
+
+            var reader = new FileReader();
+            reader.onload = function(){
+                var dataURL = reader.result;
+                var output = $(".current-img");
+                output.attr("src",dataURL);
+            };
+            reader.readAsDataURL(input.files[0]);
+        };
+    </script>
 @endsection

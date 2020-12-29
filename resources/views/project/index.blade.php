@@ -24,6 +24,7 @@
                                 <thead>
                                 <tr>
                                     <th>id</th>
+                                    <th>Logo</th>
                                     <th>Name</th>
                                     <th>Url</th>
                                     <th>Controls</th>
@@ -34,6 +35,9 @@
                                 @foreach($projects as $pj)
                                     <tr>
                                         <td>{{$pj->id}}</td>
+                                        <td>
+                                            <img src="{{asset($pj->photo)}}" class="w-25 rounded rounded-circle" alt="">
+                                        </td>
                                         <td>{{$pj->name}}</td>
                                         <td>{{$pj->url}}</td>
                                         <td class="no-warp">

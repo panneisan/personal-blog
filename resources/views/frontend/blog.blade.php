@@ -6,6 +6,15 @@
         Go To Home
     </a>
 @stop
+@section('navbar')
+    <nav class="nav navbar-expand-md animate__animated animate__slideInDown ani-dalay-5" id="nav-list">
+        <ul class="nav-list" >
+            <li class="nav-item "><a href="{{url('/')}}">Home</a></li>
+            <li class="nav-item active"><a href="{{route('blog.show')}}">Blog</a></li>
+            <li class="nav-item  contact"><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+@stop
 @section('auth')
     <div class="d-flex justify-content-around px-3">
         @if(Auth::check())
@@ -39,8 +48,8 @@
                             <a href="{{asset($p->photo)}}" data-lightbox="example-set" data-title="{{$p->title}}">
                                 <img src="{{asset($p->photo)}}" alt="" style="height: 250;width: 200px">
                             </a>
-                            <h4>{{$p->title}}</h4>
-                            <p class="text-justify">{{substr($p->description,0,200)}}.....</p>
+                            <h4 class="mt-2">{{$p->title}}</h4>
+                            <p class="text-justify">{{substr($p->description,0,300)}}.....</p>
                             <a href="{{route("blog.detail",$p->id)}}" class="btn btn-primary">Read More <i class="feather-chevrons-right"></i></a>
                             <br>
                         </div>

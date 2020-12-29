@@ -19,7 +19,7 @@
                                     <li class="breadcrumb-item" aria-current="page">Edit-project</li>
                                 </ol>
                             </nav>
-                            <form action="{{route('project.update',$project->id)}}" method="post">
+                            <form action="{{route('project.update',$project->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                                 <div class="from-group">
@@ -36,6 +36,23 @@
                                     <small class="text-danger">{{$message}}</small>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <div class="form-inline d-flex justify-content-start align-items-center">
+                                        <div class="position-relative">
+                                            <button type="button" class="btn btn-light position-absolute edit-photo" style="bottom: 5px;right: 15px">
+                                                <i class="fas fa-edit text-primary"></i>
+                                            </button>
+                                            <img src="{{asset("$project->photo")}}" style="height: 200px" class="mr-2 rounded current-img" alt="">
+                                        </div>
+                                        <input type="hidden" name="original" id="original" value="">
+                                        <input type="file" name="photo"  id="file-upload" onchange='openFile(event)' class="form-control d-none flex-grow-1 p-1 mr-2">
+                                        @error("photo")
+                                        <small class="text-danger">{{$message}}</small>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
                                 <br>
                                 <button type="submit" class="btn btn-primary"><i class="feather-upload"></i>Update</button>
                             </form>
@@ -49,6 +66,20 @@
 @endsection
 @section("foot")
     <script>
+        $(".edit-photo").click(function () {
+            $("#file-upload").click();
+        });
 
+        var openFile = function(event) {
+            var input = event.target;
+
+            var reader = new FileReader();
+            reader.onload = function(){
+                var dataURL = reader.result;
+                var output = $(".current-img");
+                output.attr("src",dataURL);
+            };
+            reader.readAsDataURL(input.files[0]);
+        };
     </script>
 @endsection

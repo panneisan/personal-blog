@@ -1,12 +1,5 @@
 <!doctype html>
-<div class="loader-container">
-    <div class="spinner">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-    </div>
-</div>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,102 +14,9 @@
     <link rel="stylesheet" href="{{asset('vendor/feather-icon/feather.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <title>@yield("title")</title>
-    <style>
-        .loader-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: white;
-            height:100vh;
-            width: 100%;
-            position: fixed;
-            z-index: 2000;
-        }
-        .spinner {
-            width: 150px;
-            height: 150px;
-            position: relative;
-            /*   border: 1px solid black; */
-            animation: spin 3s linear infinite;
-        }
 
-        .spinner .circle:nth-child(1) {
-            width: 20px;
-            height: 20px;
-            border-radius: 0%;
-            background: #000000;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform: scale(1);
-            animation: positionToCenter 1s ease-in infinite;
-            animation-direction: alternate;
-        }
-
-        .spinner .circle:nth-child(2) {
-            width: 20px;
-            height: 20px;
-            border-radius: 0;
-            background: gray;
-            position: absolute;
-            top: 0;
-            right: 0;
-            transform: scale(1) translate(0%,0%);
-            animation: positionToCenter 1s ease-in infinite;
-            animation-direction: alternate;
-        }
-
-        .spinner .circle:nth-child(3) {
-            width: 20px;
-            height: 20px;
-            border-radius: 0%;
-            background: gray;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            transform: scale(1) translate(0%,0%);
-            animation: positionToCenter 1s ease-in infinite;
-            animation-direction: alternate;
-        }
-
-        .spinner .circle:nth-child(4) {
-            width: 20px;
-            height: 20px;
-            border-radius: 0%;
-            background: #000000;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            transform: scale(1) translate(0%,0%);
-            animation: positionToCenter 1s ease-in infinite;
-            animation-direction: alternate;
-        }
-
-
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes positionToCenter {
-            to {
-                left: 50%;
-                top: 50%;
-                bottom: 50%;
-                right: 50%;
-                transform: scale(2) translate(-50%,-50%);
-                background: #1abc9c;
-                border-radius: 50%;
-            }
-        }
-    </style>
 </head>
-<body>
+<body class="">
 <!--header-->
 <div class="container-fluid px-0">
     <div class="row">
@@ -141,15 +41,7 @@
             <!--            navigation-->
             <div class="position-sticky d-flex justify-content-between" id="navbar">
                 <div class="main-header container">
-                    <nav class="nav navbar-expand-md animate__animated animate__slideInDown ani-dalay-5" id="nav-list">
-                        <ul class="nav-list" >
-                            <li class="nav-item active"><a href="{{url('/')}}">Home</a></li>
-                            <li class="nav-item"><a href="#about">About</a></li>
-                            <li class="nav-item"><a href="#skill">Skill</a></li>
-                            <li class="nav-item"><a href="{{route('blog.show')}}">Blog</a></li>
-                            <li class="nav-item  contact"><a href="#contact">Contact Us</a></li>
-                        </ul>
-                    </nav>
+                    @yield('navbar')
                 </div>
                 @yield('auth')
             </div>
@@ -163,7 +55,7 @@
     </div>
 </div>
 <!--footer-->
-<div class="container-fluid footer text-white" id="contact">
+<div class="container-fluid  footer text-white" id="contact">
     <div class="row wow animate__slideInDown ani-dalay-1">
         <div class="col-12 col-md-4 p-lg-2 p-sm-0 p-md-0">
             <h3>This is About</h3>
@@ -174,7 +66,7 @@
             <h3>Contact Info</h3>
             <br>
             <p>Phone : <a href="tel:09262648024">09262648024</a></p>
-            <p>Email : <a href="mailTo:www.panneisan5297@gmail.com">panneisan5297@gmail.com</a></p>
+            <p>Email : <a href="mailTo:www.pannei5297@gmail.com">panneisan5297@gmail.com</a></p>
         </div>
         <div class="col-12 col-md-3">
             <h3>Follow Me On</h3>
@@ -188,6 +80,9 @@
         </div>
     </div>
 </div>
+<div class="scroll-to-top bg-light text-dark text-center shadow" style="display: none">
+    <i class="feather-chevron-up"></i>
+</div>
 
 
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
@@ -199,5 +94,22 @@
 <script src="{{asset('js/script.js')}}"></script>
 
 @yield('script')
+<script>
+    $(".scroll-to-top").click(function () {
+        $("html").animate({
+            scrollTop:0
+        },1000);
+    });
+
+    $(window).scroll(function () {
+        let current = $(this).scrollTop();
+        if(current > $("#about").offset().top){
+            $(".scroll-to-top").fadeIn(500);
+        }else{
+            $(".scroll-to-top").fadeOut(500);
+
+        }
+    });
+</script>
 </body>
 </html>

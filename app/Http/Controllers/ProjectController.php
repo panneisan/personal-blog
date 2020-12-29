@@ -39,11 +39,16 @@ class ProjectController extends Controller
 //        return $request;
         $request->validate([
             'name'=>"required|min:4",
-            "url"=>'required|unique:projects'
+            "url"=>'required|unique:projects',
+            "photo" =>"mimes:png,jpg,gif,jpeg"
         ]);
+        $dir = "logo-img/";
+        $newName=uniqid()."_image.".$request->file("photo")->getClientOriginalExtension();
+        $request->file('photo')->move($dir,$newName);
         $project = new Project();
         $project->name =$request->name;
         $project->url =$request->url;
+        $project->photo = $dir.$newName;
         $project->save();
         return redirect()->back()->with("toast","<b>$project->name</b> is successfully added 😊");
     }
@@ -80,10 +85,20 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
 //      return $request;
-        $request->validate([
-            'name'=>"required|min:4",
-            "url"=>'required'
-        ]);
+        if ($request->hasFile("photo")){
+            $projectPhoto = $project->photo;
+            File::delete("logo-img/".$projectPhoto);
+
+            $dir = "logo-img/";
+            $newName=uniqid()."_updateImage.".$request->file("photo")->getClientOriginalExtension();
+            $request->file('photo')->move($dir,$newName);
+
+            $project->title = $request->title;
+            $project->about_text = $request->about_text;
+            $project->photo= $dir.$newName;
+            $project->update();
+
+        }
         $project->name =$request->name;
         $project->url =$request->url;
         $project->update();

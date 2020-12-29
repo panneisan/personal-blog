@@ -25,6 +25,52 @@
             </li>
             <li>
                 <h5 class="text-secondary">
+                    About Us
+                </h5>
+            </li>
+            <li>
+                <a class="menu-item" href="{{route('about.create')}}">
+                    <span>
+                        <i class="feather-user-plus mr-1"></i>
+                        Add Details
+                    </span>
+
+                </a>
+            </li>
+            <li>
+                <div class="my-5"></div>
+            </li>
+
+
+            <li>
+                <h5 class="text-secondary">
+                    Certificate Management
+                </h5>
+            </li>
+            <li>
+                <a class="menu-item" href="{{route('certificate.create')}}">
+                    <span>
+                        <i class="feather-user-plus mr-1"></i>
+                        Add Certificate
+                    </span>
+
+                </a>
+                <a class="menu-item" href="{{route('certificate.index')}}">
+                    <span>
+                        <i class="feather-list mr-1"></i>
+                        Certificate List
+                    </span>
+                    <span class="badge badge-pill badge-light shadow-sm">
+                        {{ \App\Certificate::count() }}
+                    </span>
+
+                </a>
+            </li>
+            <li>
+                <div class="my-5"></div>
+            </li>
+            <li>
+                <h5 class="text-secondary">
                     Skill Management
                 </h5>
             </li>

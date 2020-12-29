@@ -8,13 +8,16 @@ body{
 	overflow-x: hidden;
 	font-size: 17px;
 }
-.h-full{
-	min-height: 80vh;
+.min-h-100{
+	min-height: 100vh;
+}
+.min-h-50{
+    min-height: 50vh;
 }
 
 /*header*/
 .header{
-	background: black;
+    background-color: black;
 	color: white;
 	padding: 30px;
 	text-align: center;
@@ -94,6 +97,33 @@ body{
 	text-decoration: none;
 	color: white;
 }
+
+.certificate-card{
+    border-radius: 35px !important;
+    border:none !important;
+    transition: 0.5s;
+}
+
+.certificate-card:hover{
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    transform: scale(0.98);
+}
+.certificate-card img{
+    transition: 0.5s;
+}
+
+.certificate-card:hover img{
+    transform: translateX(20px);
+}
+
+.certificate-card-des{
+    height: 180px;
+}
+.blog-card{
+    border-radius: 35px !important;
+    border:none !important;
+    transition: 0.5s;
+}
 .footer a:hover{
 	transform: scale(1.2) !important;
 }
@@ -170,8 +200,44 @@ body{
 .ani-dalay-6{
     animation-delay: 2.5s;
 }
+.status-card{
+    transition: 0.3s;
+}
+.status-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0 ,0, 0, 0.2);
+}
+.status-card:active {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.scroll-to-top{
 
- @media (max-width: 1024px) {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    animation: aa 1s ease-in-out;
+    border-radius: 0.25rem;
+
+}
+@keyframes aa {
+    from{
+        transform: translateY(150px);
+    }to{
+         transform: translateY(0);
+     }
+}
+
+
+ @media screen and (max-width: 1024px) {
+     *{
+         padding: 0;
+         margin: 0;
+         box-sizing: border-box;
+     }
 	.footer{
 		padding: 10px;
 	}
@@ -187,4 +253,20 @@ body{
 		 text-transform: capitalize;
 		 transition: 0.3s;
 	 }
+     .about-img{
+         margin-top: 10px;
+         width: 100%;
+         padding: 5px;
+     }
+     .about_text{
+         font-size: 25px;
+         text-align: center;
+     }
+     .about-btn{
+        margin-bottom: 10px;
+     }
+     .certificate-card{
+         padding: 5px;
+         margin-bottom: 5px;
+     }
 }

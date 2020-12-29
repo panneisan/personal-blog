@@ -43,6 +43,8 @@ Route::prefix("admin-panel")->middleware(["auth","isAdmin"])->group(function (){
     Route::post('/users/{id}/update', 'UserController@update')->name('user.update');
 
 //    skill
+    Route::resource("/about","AboutController");
+    Route::resource("/certificate","CertificateController");
     Route::resource("/skill","SkillController");
     Route::resource("/project","ProjectController");
     Route::resource("/category","CategoryController");

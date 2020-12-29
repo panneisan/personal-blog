@@ -102,12 +102,16 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'category_id'=>'required'
+        ]);
+
         if ($request->hasFile("photo")){
             $postPhoto = $post->photo;
             File::delete("post-img/".$postPhoto);
 
             $dir = "post-img/";
-            $newName=uniqid()."_image.".$request->file("photo")->getClientOriginalExtension();
+            $newName=uniqid()."_updateImage.".$request->file("photo")->getClientOriginalExtension();
             $request->file('photo')->move($dir,$newName);
 
             $post->title = $request->title;
@@ -116,13 +120,11 @@ class PostController extends Controller
             $post->photo= $dir.$newName;
             $post->update();
 
-        }else{
-            $post->title = $request->title;
-            $post->description = $request->description;
-            $post->category_id = $request->category_id;
-            $post->update();
         }
-
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->category_id = $request->category_id;
+        $post->update();
         return redirect()->route('post.index')->with("toast","<b>$post->title</b> is successfully Updated 😊");
 
     }

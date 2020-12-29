@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\About;
 use App\Category;
+use App\Certificate;
 use App\Comment;
 use App\Like;
 use App\Post;
@@ -14,11 +16,13 @@ use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
     public function index(){
-        $skills = Skill::paginate(5);
-        $project  = Project::latest()->get();
+        $about = About::all();
+        $certificate = Certificate::all();
+        $skills = Skill::paginate(7);
+        $project  = Project::all();
         $post=Post::latest()->get();
 
-        return view("frontend.index",compact('skills',"project","post"));
+        return view("frontend.index",compact('skills',"project","post","about","certificate"));
     }
     public function blog(){
         if (!Auth::check()){

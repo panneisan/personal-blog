@@ -6,6 +6,15 @@
         Explore My Blogs
     </a>
 @stop
+@section('navbar')
+    <nav class="nav navbar-expand-md animate__animated animate__slideInDown ani-dalay-5" id="nav-list">
+        <ul class="nav-list" >
+            <li class="nav-item"><a href="{{url('/')}}">Home</a></li>
+            <li class="nav-item active"><a href="{{route('blog.show')}}">Blog</a></li>
+            <li class="nav-item  contact"><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+@stop
 @section('auth')
     <div class="d-flex justify-content-around px-3">
         @if(Auth::check())
@@ -33,7 +42,7 @@
     <div class="row">
         <div class="col-12 col-md-12">
             <div class="post-detail">
-                <img src="{{asset($post->photo)}}" style="height: 300px" class="w-50" alt="">
+                <img src="{{asset($post->photo)}}" style="height: 300px" class="w-25" alt="">
                 <div>
                     <strong>
                         <i class="feather-calendar"></i>
